@@ -44,7 +44,8 @@ host_sys = host_machine.system()
 have_selected_audio = false # meson lacks a break instruction
 foreach hts_au : hts_audio
   if not have_selected_audio
-    if hts_au == 'win32' and host_sys == 'windows' or host_sys == 'wince' or host_sys == 'cygwin' or host_sys == 'mingw'
+    # workaround for bug in 0.37 see https://github.com/mesonbuild/meson/issues/1479
+    if false or hts_au == 'win32' and host_sys == 'windows' or host_sys == 'wince' or host_sys == 'cygwin' or host_sys == 'mingw'
       winmm_lib = c_compiler.find_library('winmm', required: false)
       if winmm_lib.found()
         have_selected_audio = true
